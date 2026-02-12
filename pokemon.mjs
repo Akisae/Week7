@@ -1,7 +1,15 @@
+import fs from 'fs';
+import fetch from 'node-fetch';
+//#region Cache
+const CACHE_FILE = './pokemonCache.json'
 
-
-
-
+let pokemonCache = new Map();
+if(fs.existsSync(CACHE_FILE)){
+    const savedCache = JSON.parse(fs.readFileSync(CACHE_FILE, 'utf-8'));
+    savedCache.forEach((key, value) => pokemonCache.set(key, value));
+    console.log('loaded ${pokemonCache.size} Pokemon from the cache.');
+}
+//#endregion
 const baseURL = "https://pokeapi.co/api/v2/"
 
 
